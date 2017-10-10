@@ -1,0 +1,22 @@
+{
+  "rtime": 2.9362399578094482,
+  "utime": 2.128,
+  "stime": 0.06,
+  "cutime": 0.0,
+  "cstime": 0.0,
+  "minor_gb": 2.690540201961994,
+  "promoted_gb": 0.014406964182853699,
+  "major_gb": 0.020257093012332916,
+  "allocated_gb": 2.6963903307914734,
+  "minor_collections": 350,
+  "major_collections": 3,
+  "compactions": 0,
+  "top_heap_gb": 0.017978668212890625,
+  "stack_kb": 0.359375,
+  "minor_heap_kb": 8192.0,
+  "attributes_table": {
+    "num_bindings": 17,
+    "num_buckets": 16,
+    "max_bucket_length": 3
+  }
+}

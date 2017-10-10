@@ -1,0 +1,24 @@
+[INFO] output of locale.getdefaultlocale(): ('en_US', 'UTF-8')
+[INFO] encoding we chose in the end: UTF-8
+[INFO] Running command /usr/local/lib/infer/infer/bin/../lib/python/infer.py --analyzer checkers -j 4 --project-root /home/cpu10661/AndroidStudioProjects/emojicon-master --reactive --out /home/cpu10661/AndroidStudioProjects/emojicon-master/infer-out -- ./gradlew build
+[INFO] Path to infer script /usr/local/lib/infer/infer/bin/../lib/python/infer.py (/usr/local/lib/infer/infer/lib/python/infer.py)
+[INFO] Platform: Linux-4.10.0-35-generic-x86_64-with-Ubuntu-16.04-xenial
+[INFO] PATH=/home/cpu10661/bin:/home/cpu10661/.local/bin:/home/cpu10661/bin:/home/cpu10661/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin
+[INFO] SHELL=/bin/bash
+[INFO] PWD=/home/cpu10661/AndroidStudioProjects/emojicon-master
+[INFO] Running with:
+
+------------------------------------------------------------
+Gradle 3.3
+------------------------------------------------------------
+
+Build time:   2017-01-03 15:31:04 UTC
+Revision:     075893a3d0798c0c1f322899b41ceca82e4e134b
+
+Groovy:       2.4.7
+Ant:          Apache Ant(TM) version 1.9.6 compiled on June 29 2015
+JVM:          1.8.0_144 (Oracle Corporation 25.144-b01)
+OS:           Linux 4.10.0-35-generic amd64
+
+
+[ERROR] Error during capture phase, exiting

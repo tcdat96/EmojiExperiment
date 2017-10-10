@@ -1,0 +1,13 @@
+Found 1 issue
+
+library/src/main/java/io/github/rockerhieu/emojicon/EmojiconGridFragment.java:115: error: NULL_DEREFERENCE
+  object `arr` last assigned on line 114 could be null and is dereferenced at line 115
+  113.   
+  114.           ArrayList<Integer> arr = null;
+  115. >         int a = arr.size();
+  116.   
+  117.   //        usingGridViewWithCachedEmojis(view);
+
+Summary of the reports
+
+  NULL_DEREFERENCE: 1
