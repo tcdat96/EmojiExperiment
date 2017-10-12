@@ -9,5 +9,11 @@ Methods I have tested in the project:
 5. Static layout: this is similar to the normal GridView method, but replacing normal TextView with StaticLayout (a more detailed explanation can be found [here](https://engineering.instagram.com/improving-comment-rendering-on-android-a77d5db3d82e)). This delivers impressive result, compared to other methods.
 6. RecyclerView with GridLayout: substitute GridView with a RecyclerView, not very promising result, even lagger than the original one.
 7. Vertical recyclerView: same as above.
-8. TableLayout: substitute GridView with TableLayout. This is the only method satifies the expectations of the experiment. It is not perfect, of course, the major drawback is all emojis have to be added from the start, affect negatively user experience from the start and not really scalable for future development.
+8. TableLayout: substitute GridView with TableLayout. This is the only method satifies the expectations of the experiment. It is not perfect, of course, the major drawback is all emojis have to be added initially, negatively affecting user experience from the start and not really scalable for future development.
 9. Litho: use the open-source framework from Facebook which claims to improve the scrolling performance greatly by moving the measure and layout off the main thread, flattening views, recycling primitive views. Nevertheless, the result is actually the worst in all methods, unbearable lags in every scroll gestures.
+# Results
+To demonstrate the performance of each method, the experiment will measure correlated processing time using TraceView from Android Device Monitor. These numbers are only attempted for experimental purposes, please take these results with a grain of salt.  
+Markdown | Less | Pretty  
+--- | --- | ---  
+*Still* | `renders` | **nicely**  
+1 | 2 | 3  
