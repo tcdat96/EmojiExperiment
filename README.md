@@ -13,7 +13,103 @@ Methods I have tested in the project:
 9. Litho: use the open-source framework from Facebook which claims to improve the scrolling performance greatly by moving the measure and layout off the main thread, flattening views, recycling primitive views. Nevertheless, the result is actually the worst in all methods, unbearable lags in every scroll gestures.
 # Results
 To demonstrate the performance of each method, the experiment will measure correlated processing time using TraceView from Android Device Monitor. These numbers are only attempted for experimental purposes, please take these results with a grain of salt.  
-Markdown | Less | Pretty  
---- | --- | ---  
-*Still* | `renders` | **nicely**  
-1 | 2 | 3  
+Some Clarifications: 
+1. **Incl** stands for **inclusive** which is the time spent on the function itself as well as the sum of the times of all functions that it calls. Wee also have the **exclusive** keyword which represents only the time spent on function itself. The exclusive time is kind of irrelevant to this context, so it is excluded from the results.
+2. The experiment only focuses on the scrolling performance, other factors e.g. initial views time,... are not considered in this project.
+3. The measured functions for each methods are slightly different according to their underlying structures (e.g. GridView, RecyclerView). For those ones use GridView, the chosen function is getView (except for the StaticLayout case will use both getView and TextLayoutView$onDraw). And getViewForPosition will be chosen for RecyclerView, this also includes Litho framework (yup Litho is based on RecyclerView foundation).
+<table style="width:100%">
+  <tr>
+    <th>Method</th>
+    <th>Incl CPU time</th>
+    <th>Incl CPU time</th>
+    <th>Incl Real time</th>
+    <th>Incl Real time</th>
+    <th>Calls+Recur</th>
+    <th>CPU time/cal</th>
+    <th>Real time/cal</th>
+  </tr>
+  <tr>
+    <th>Original</th>
+    <th>42.2%</th>
+    <th>74.327</th>
+    <th>3.2%</th>
+    <th>105.140</th>
+    <th></th>
+    <th>2.723</th>
+    <th>3.845</th>
+    					
+  </tr>
+  <tr>
+    <th>Normal GridView</th>
+    <th>35.7%	</th>
+    <th>55.130</th>
+    <th>2.5%</th>
+    <th>75.522</th>
+    <th></th>
+    <th>2.920</th>
+    <th>3.997</th>
+  </tr>
+  <tr>
+    <th>Multithreads</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <th>Caches</th>
+    <th>44.3%</th>
+    <th>77.473</th>
+    <th>3.5%</th>
+    <th>111.002</th>
+    <th></th>
+    <th>2.934</th>
+    <th>4.202</th>
+  </tr>
+  <tr>
+    <th>StaticLayout</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <th>RV with GridLayout</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <th>Vertical RV</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <th>Litho</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+</table>
+
+\*The table only includes the final average running time, more comprehensive results can be found [here](https://vngms-my.sharepoint.com/personal/dattc2_vng_com_vn/_layouts/15/guestaccess.aspx?guestaccesstoken=yCwgDVv6pb9cdEbuDfKWkjhwk7eUwrNxvx4DdPnblH4%3d&docid=2_0a412ef26366e4bf7838e760ac139fc7a&rev=1)  
+\*\*Experiment is conducted with the system default emojis (not custom emojis) in GenyMotion emulator (Google Pixel 7.1.0)
