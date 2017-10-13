@@ -19,6 +19,7 @@ package io.github.rockerhieu.emojicon;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -37,6 +38,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import io.github.rockerhieu.emojicon.adapter.GridAdapter;
 import io.github.rockerhieu.emojicon.adapter.GridStaticLayoutAdapter;
@@ -147,6 +149,9 @@ public class EmojiconGridFragment extends Fragment
                 break;
             case EmojiconsFragment.TABLE_LAYOUT_VIEW:
                 usingTableLayout(view);
+                break;
+            case EmojiconsFragment.TEXT_NOT_EMOJI:
+                usingTextInsteadOfEmoji(view);
                 break;
         }
     }
@@ -336,6 +341,19 @@ public class EmojiconGridFragment extends Fragment
         emojisTable.setOnItemClickListener(this);
 
         view.findViewById(R.id.sv_grid_view).setVisibility(View.VISIBLE);
+    }
+
+    private void usingTextInsteadOfEmoji(View view) {
+        Log.d(TAG, "Text instead of emoji");
+
+        final GridView gridView = view.findViewById(R.id.grid_view);
+        gridView.setVisibility(View.VISIBLE);
+
+        ArrayList<CharSequence> texts = new ArrayList<>();
+        for (int i = 0; i < mEmojicons.length; i++) {
+            texts.add(" " + i);
+        }
+        gridView.setAdapter(new GridStringAdapter(view.getContext(), texts, false));
     }
 
     @Override

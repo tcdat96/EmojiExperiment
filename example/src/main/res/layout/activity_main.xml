@@ -1,83 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:emojicon="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     tools:context="com.rockerhieu.emojicon.example.MainActivity">
 
-    <Button
-        android:id="@+id/btn_original"
+    <LinearLayout
+        android:id="@+id/ll_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:onClick="onMethodButtonClicked"
-        android:text="@string/original_grid_view"/>
+        android:orientation="vertical"
+        android:gravity="center" />
 
-    <Button
-        android:id="@+id/btn_normal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:onClick="onMethodButtonClicked"
-        android:text="@string/normal_grid_view"/>
-
-    <Button
-        android:id="@+id/btn_threads"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:onClick="onMethodButtonClicked"
-        android:text="@string/grid_view_with_threads"/>
-
-    <Button
-        android:id="@+id/btn_caches"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:onClick="onMethodButtonClicked"
-        android:text="@string/grid_view_with_caches"/>
-
-    <Button
-        android:id="@+id/btn_static_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:onClick="onMethodButtonClicked"
-        android:text="@string/grid_view_with_static_layout"/>
-
-    <Button
-        android:id="@+id/btn_rv_grid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:onClick="onMethodButtonClicked"
-        android:text="@string/recycler_view_grid"/>
-
-    <Button
-        android:id="@+id/btn_vertical_rv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:onClick="onMethodButtonClicked"
-        android:text="@string/vertical_recycler_view"/>
-
-    <Button
-        android:id="@+id/btn_table_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:onClick="onMethodButtonClicked"
-        android:text="@string/table_layout"/>
-
-    <Button
-        android:id="@+id/btn_litho"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:onClick="onMethodButtonClicked"
-        android:text="@string/litho_library"/>
-
-</LinearLayout>
+</ScrollView>

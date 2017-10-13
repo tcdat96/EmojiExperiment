@@ -65,6 +65,7 @@ public class EmojiconsFragment extends Fragment implements ViewPager.OnPageChang
     public final static int VERTICAL_RECYCLER_VIEW = 6;
     public final static int TABLE_LAYOUT_VIEW = 7;
     public final static int LITHO_LIBRARY = 8;
+    public final static int TEXT_NOT_EMOJI = 9;
     public final static int DEFAULT_DISPLAY_METHOD = LITHO_LIBRARY;
 
     public static EmojiconsFragment newInstance(boolean useSystemDefault, int displayMethod) {

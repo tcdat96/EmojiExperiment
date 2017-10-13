@@ -31,5 +31,6 @@
     <string name="vertical_recycler_view">Vertical recycler view</string>
     <string name="table_layout">Table layout</string>
     <string name="litho_library">Litho</string>
+    <string name="text_not_emoji">Text instead of emoji (for testing)</string>
 
 </resources>
