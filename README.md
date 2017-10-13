@@ -17,6 +17,7 @@ Some Clarifications:
 1. **Incl** stands for **inclusive** which is the time spent on the function itself as well as the sum of the times of all functions that it calls. Wee also have the **exclusive** keyword which represents only the time spent on function itself. The exclusive time is kind of irrelevant to this context, so it is excluded from the results.
 2. The experiment only focuses on the scrolling performance, other factors e.g. initial views time,... are not considered in this project.
 3. The measured functions for each methods are slightly different according to their underlying structures (e.g. GridView, RecyclerView). For those ones use GridView, the chosen function is getView (except for the StaticLayout case will use both getView and TextLayoutView$onDraw). And getViewForPosition will be chosen for RecyclerView, this also includes Litho framework (yup Litho is based on RecyclerView foundation).
+4. The experiment also excludes the multithreading method. Multithreading in this situation is basically a failed attempt, except for the initial stage, all parts after that are still happening in the UI thread. The results will be identical to normal GridView with no performance gain, even worse in some cases.
 <table style="width:100%">
   <tr>
     <th>Method</th>
@@ -34,10 +35,9 @@ Some Clarifications:
     <th>74.327</th>
     <th>3.2%</th>
     <th>105.140</th>
-    <th></th>
+    <th>27.4</th>
     <th>2.723</th>
-    <th>3.845</th>
-    					
+    <th>3.845</th>			
   </tr>
   <tr>
     <th>Normal GridView</th>
@@ -45,19 +45,9 @@ Some Clarifications:
     <th>55.130</th>
     <th>2.5%</th>
     <th>75.522</th>
-    <th></th>
+    <th>19.2</th>
     <th>2.920</th>
     <th>3.997</th>
-  </tr>
-  <tr>
-    <th>Multithreads</th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
   <tr>
     <th>Caches</th>
@@ -65,39 +55,39 @@ Some Clarifications:
     <th>77.473</th>
     <th>3.5%</th>
     <th>111.002</th>
-    <th></th>
+    <th>27.1</th>
     <th>2.934</th>
     <th>4.202</th>
   </tr>
-  <tr>
+  <tr>			
     <th>StaticLayout</th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>10.4%</th>
+    <th>11.073</th>
+    <th>0.7%</th>
+    <th>20.478</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
-  <tr>
+  <tr>						
     <th>RV with GridLayout</th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>38.8%</th>
+    <th>126.047</th>
+    <th>3.6%</th>
+    <th>161.503</th>
+    <th>53.0</th>
+    <th>2.390</th>
+    <th>3.063</th>
   </tr>
   <tr>
     <th>Vertical RV</th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>23.1%</th>
+    <th>63.302</th>
+    <th>2.3%</th>
+    <th>89.397</th>
+    <th>24.6</th>
+    <th>2.638</th>
+    <th>3.702</th>
   </tr>
   <tr>
     <th>Litho</th>
@@ -111,5 +101,5 @@ Some Clarifications:
   </tr>
 </table>
 
-\*The table only includes the final average running time, more comprehensive results can be found [here](https://vngms-my.sharepoint.com/personal/dattc2_vng_com_vn/_layouts/15/guestaccess.aspx?guestaccesstoken=yCwgDVv6pb9cdEbuDfKWkjhwk7eUwrNxvx4DdPnblH4%3d&docid=2_0a412ef26366e4bf7838e760ac139fc7a&rev=1)  
+\*This table only includes the average results, you can find more comprehensive results [here](https://vngms-my.sharepoint.com/personal/dattc2_vng_com_vn/_layouts/15/guestaccess.aspx?guestaccesstoken=yCwgDVv6pb9cdEbuDfKWkjhwk7eUwrNxvx4DdPnblH4%3d&docid=2_0a412ef26366e4bf7838e760ac139fc7a&rev=1)  
 \*\*Experiment is conducted with the system default emojis (not custom emojis) in GenyMotion emulator (Google Pixel 7.1.0)
