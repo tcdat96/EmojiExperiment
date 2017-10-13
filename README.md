@@ -12,12 +12,12 @@ Methods I have tested in the project:
 8. TableLayout: substitute GridView with TableLayout. This is the only method satifies the expectations of the experiment. It is not perfect, of course, the major drawback is all emojis have to be added initially, negatively affecting user experience from the start and not really scalable for future development.
 9. Litho: use the open-source framework from Facebook which claims to improve the scrolling performance greatly by moving the measure and layout off the main thread, flattening views, recycling primitive views. Nevertheless, the result is actually the worst in all methods, unbearable lags in every scroll gestures.
 # Results
-To demonstrate the performance of each method, the experiment will measure correlated processing time using TraceView from Android Device Monitor. These numbers are only attempted for experimental purposes, please take these results with a grain of salt.  
-Some Clarifications: 
+To demonstrate the performance of each method, the experiment will measure correlated processing time using TraceView from Android Device Monitor. These numbers are only **attempted for experimental purposes**, they are not applicable to all devices. Please take these results with a grain of salt.  
+Some clarifications: 
 1. **Incl** stands for **inclusive** which is the time spent on the function itself as well as the sum of the times of all functions that it calls. Wee also have the **exclusive** keyword which represents only the time spent on function itself. The exclusive time is kind of irrelevant to this context, so it is excluded from the results.
 2. The experiment only focuses on the scrolling performance, other factors e.g. initial views time,... are not considered in this project.
 3. The measured functions for each methods are slightly different according to their underlying structures (e.g. GridView, RecyclerView). For those ones use GridView, the chosen function is getView (except for the StaticLayout case will use both getView and TextLayoutView$onDraw). And getViewForPosition will be chosen for RecyclerView, this also includes Litho framework (yup Litho is based on RecyclerView foundation).
-4. The experiment also excludes the multithreading method. Multithreading in this situation is basically a failed attempt, except for the initial stage, all parts after that are still happening in the UI thread. The results will be identical to normal GridView with no performance gain, even worse in some cases.
+4. The experiment also excludes the multithreading method. Multithreading in this situation is basically a failed attempt, except for the initial stage, all parts after that are still happening in the UI thread. The results will be identical to normal GridView with no performance gain, maybe even worse in some cases.
 <table style="width:100%">
   <tr>
     <th>Method</th>
@@ -91,15 +91,25 @@ Some Clarifications:
   </tr>
   <tr>
     <th>Litho</th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>12.1%</th>
+    <th>47.438</th>
+    <th>1.2%</th>
+    <th>60.667</th>
+    <th>30.0</th>
+    <th>1.581</th>
+    <th>2.018</th>
   </tr>
 </table>
 
 \*This table only includes the average results, you can find more comprehensive results [here](https://vngms-my.sharepoint.com/personal/dattc2_vng_com_vn/_layouts/15/guestaccess.aspx?guestaccesstoken=yCwgDVv6pb9cdEbuDfKWkjhwk7eUwrNxvx4DdPnblH4%3d&docid=2_0a412ef26366e4bf7838e760ac139fc7a&rev=1)  
 \*\*Experiment is conducted with the system default emojis (not custom emojis) in GenyMotion emulator (Google Pixel 7.1.0)
+<br/>
+<br/>
+<br/>
+As shown in the table, the difference between the first 3 methods (original, normal GV, caches) is negligible. The normal GV method gains a small boost in processing time, thanks to the replacement with the simple TextView from the original. The cached mechanism, however, does absolutely nothing to performance. Compared to them, the StaticLayout result is so much more compelling, with really nothing to debate.
+<br/><br/>
+On the other hand, there's a large discrepancy between those methods built with RV under the hood. Grid RV (aka the slowest) takes as much as two times longer than the fastest method, which is the Litho framework. One surprising thing is that the fancy asynchronous layout benefit was actuall not in used when scrolling, only the initialize view process includes this feature.
+<br/><br/>
+Just looking at the processing time, we might think that the performance in RVs will be very much alike to GVs, but this is actually an inaccurate way to compare those two. All the numbers have to be considered as a whole to give a more proper evaluation. Even though the processing time is nearly equal, the occupied percentage in RVs is much lower than the other, i.e. the total amount of time is much longer in comparison. This also matches with the reality when tested with a low-end device, RV type actually gives a serious lag when scrolling, something does not happen noticeably with GVs.
+<br/><br/>
+Last but not least, these numbers are just for experimental purposes, in other words **smaller processing time will not guarantee better performance**. Do not use this as a reference for performance in any kind of debates or papers.
