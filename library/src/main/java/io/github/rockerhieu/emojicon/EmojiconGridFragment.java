@@ -265,13 +265,17 @@ public class EmojiconGridFragment extends Fragment
         Log.d(TAG, "RecyclerView with GridLayout");
 
         final RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rv_grid_view);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 8));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 10));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setHasFixedSize(true);
         recyclerView.setVisibility(View.VISIBLE);
 
+//        recyclerView.setDrawingCacheEnabled(true);
+//        recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_AUTO);
+
         final ArrayList<CharSequence> emojis = new ArrayList<>();
         final RecyclerViewGridAdapter adapter = new RecyclerViewGridAdapter(emojis, mUseSystemDefault);
+        adapter.setHasStableIds(true);
         recyclerView.setAdapter(adapter);
 
         new AsyncTask<Void, Void, Void>() {
@@ -328,7 +332,12 @@ public class EmojiconGridFragment extends Fragment
 
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rv_grid_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setDrawingCacheEnabled(true);
+
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(mEmojicons, mUseSystemDefault);
+        adapter.setHasStableIds(true);
         recyclerView.setAdapter(adapter);
         recyclerView.setVisibility(View.VISIBLE);
     }

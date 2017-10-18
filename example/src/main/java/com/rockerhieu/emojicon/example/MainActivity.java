@@ -18,7 +18,6 @@ package com.rockerhieu.emojicon.example;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.IntegerRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -31,6 +30,8 @@ import java.util.LinkedHashMap;
 import io.github.rockerhieu.emojicon.EmojiconsFragment;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String ARG_DISPLAY_METHOD_RES_ID = "displayMethodResId";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     Intent intent = new Intent(MainActivity.this, MainEmojiconsActivity.class);
                     intent.putExtra(EmojiconsFragment.ARG_DISPLAY_METHOD, displayMethods.get(id));
+                    intent.putExtra(ARG_DISPLAY_METHOD_RES_ID, id);
                     startActivity(intent);
                 }
             });

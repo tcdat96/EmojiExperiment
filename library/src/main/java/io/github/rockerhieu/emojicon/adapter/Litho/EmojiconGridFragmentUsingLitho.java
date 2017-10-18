@@ -18,6 +18,7 @@ package io.github.rockerhieu.emojicon.adapter.Litho;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -30,7 +31,10 @@ import android.view.ViewGroup;
 
 import com.facebook.litho.Component;
 import com.facebook.litho.ComponentContext;
+import com.facebook.litho.ComponentTree;
+import com.facebook.litho.ComponentsSystrace;
 import com.facebook.litho.LithoView;
+import com.facebook.litho.utils.DisplayListUtils;
 import com.facebook.litho.widget.GridLayoutInfo;
 import com.facebook.litho.widget.Recycler;
 import com.facebook.litho.widget.RecyclerBinder;
@@ -111,7 +115,7 @@ public class EmojiconGridFragmentUsingLitho extends Fragment implements EmojiCom
         final ComponentContext context = new ComponentContext(getContext());
 
         final RecyclerBinder binder = new RecyclerBinder.Builder()
-                .layoutInfo(new GridLayoutInfo(getContext(), 8, OrientationHelper.VERTICAL, false))
+                .layoutInfo(new GridLayoutInfo(getContext(), 10, OrientationHelper.VERTICAL, false))
                 .canPrefetchDisplayLists(true)
                 .canCacheDrawingDisplayLists(true)
                 .build(context);
@@ -132,6 +136,12 @@ public class EmojiconGridFragmentUsingLitho extends Fragment implements EmojiCom
         }
 
         return LithoView.create(context, component);
+
+//        final ComponentTree componentTree = ComponentTree.create(context, component).canPrefetchDisplayLists(true).build();
+//        LithoView lithoView = new LithoView(getContext());
+//        lithoView.setComponentTree(componentTree);
+//        DisplayListUtils.prefetchDisplayLists(lithoView);
+//        return lithoView;
     }
 
     @Override

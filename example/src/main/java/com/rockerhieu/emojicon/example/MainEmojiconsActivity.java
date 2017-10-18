@@ -47,6 +47,10 @@ public class MainEmojiconsActivity extends AppCompatActivity implements
         });
 
         mDisplayMethod = getIntent().getIntExtra(EmojiconsFragment.ARG_DISPLAY_METHOD, EmojiconsFragment.DEFAULT_DISPLAY_METHOD);
+        int methodResId = getIntent().getIntExtra(MainActivity.ARG_DISPLAY_METHOD_RES_ID, EmojiconsFragment.DEFAULT_DISPLAY_METHOD);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(methodResId);
+        }
 
         setEmojiconFragment(mCheckBox.isChecked());
     }

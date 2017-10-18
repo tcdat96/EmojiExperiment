@@ -12,6 +12,7 @@ import com.facebook.litho.annotations.OnCreateLayout;
 import com.facebook.litho.annotations.OnEvent;
 import com.facebook.litho.annotations.Prop;
 import com.facebook.litho.widget.Text;
+import com.facebook.litho.widget.VerticalGravity;
 import com.facebook.yoga.YogaEdge;
 
 import io.github.rockerhieu.emojicon.emoji.Emojicon;
@@ -34,7 +35,7 @@ public class EmojiComponentSpec {
                 .textSizeDip(textSizeDip)
                 .textAlignment(textAlignment)
                 .withLayout()
-                .paddingDip(YogaEdge.BOTTOM, 8)
+                .paddingDip(YogaEdge.BOTTOM, 16)
                 .clickHandler(EmojiComponent.onClick(c))
                 .build();
     }

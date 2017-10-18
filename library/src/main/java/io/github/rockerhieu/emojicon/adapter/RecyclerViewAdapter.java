@@ -2,14 +2,17 @@ package io.github.rockerhieu.emojicon.adapter;
 
 import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import io.github.rockerhieu.emojicon.BuildConfig;
 import io.github.rockerhieu.emojicon.EmojiconTextView;
 import io.github.rockerhieu.emojicon.R;
 import io.github.rockerhieu.emojicon.emoji.Emojicon;
@@ -23,7 +26,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private static final String TAG  = RecyclerViewAdapter.class.getSimpleName();
 
     private static final float DENSITY = Resources.getSystem().getDisplayMetrics().density;
-    private static final int EMOJIS_PER_ROW = 9;
+    private static final int EMOJIS_PER_ROW = 10;
     private ArrayList<Emojicon> mEmojicons;
     private boolean mUseSystemDefault;
     private OnScrollToBottomListener mOnScrollToBottomListener;
@@ -45,16 +48,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
     public void onBindViewHolder(EmojiconViewHolder holder, int position) {
 
-        assert EMOJIS_PER_ROW == holder.mRootLayout.getChildCount();
+        if (BuildConfig.DEBUG && EMOJIS_PER_ROW == holder.mRootLayout.getChildCount()) {
+            throw new IllegalArgumentException("Number of emojis per row have to be consistent");
+        }
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(dpToPixel(36), dpToPixel(36), 1f);
 
         int index = EMOJIS_PER_ROW * position;
         for (int i = 0; i < holder.mRootLayout.getChildCount(); i++) {
             EmojiconTextView emojiTextView = (EmojiconTextView) holder.mRootLayout.getChildAt(i);
-
             emojiTextView.setUseSystemDefault(mUseSystemDefault);
             emojiTextView.setText(mEmojicons.get(index + i).getEmoji());
             emojiTextView.setLayoutParams(params);
